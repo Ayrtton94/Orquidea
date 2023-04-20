@@ -4,15 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        return view('user.index');
+        $search = $request->input('search');
+        $users = User::where('name','LIKE','%'.$search.'%')->paginate();
+        return view('user.index', compact('users'));
     }
 
     /**
