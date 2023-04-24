@@ -323,6 +323,12 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Producto',
+            'url'         => 'product',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
     ],
 
     /*

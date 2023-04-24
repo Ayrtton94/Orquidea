@@ -7,6 +7,13 @@
 @stop
 
 @section('content')
+@if (session('info'))
+    <div class="alert alert-success">
+        <strong>{{session('info')}}</strong>
+    </div>
+@endif
+
+
 <div class="card">
 
     <div class="card-header">
@@ -16,6 +23,8 @@
         <div id="search-results"></div>
     </div>
 
+    @if($users->count())
+
     <div class="card-body">
         <table class="table table-striped">
             <thead>
@@ -23,6 +32,7 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Correo</th>
+                    <th>Roles</th>
                     <th>Accion</th>
                 </tr>                            
             </thead>
@@ -32,6 +42,11 @@
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
+                    <td>
+                        @foreach ($user->roles as $role)
+                            <span class="badge badge-primary">{{ $role->name }}</span>
+                        @endforeach
+                    </td>
                     <td width="10px">
                         <a class="btn btn-primary" href="{{ url('/user/'.$user['id'].'/edit') }}">Editar</a>
                     </td>
@@ -43,7 +58,14 @@
 
     <div class="card-footer">
         {{$users->links()}}
-    </div>
+    </div>        
+    @else
+        <div class="card-body">
+            <strong>No hay registro</strong>
+        </div>
+    @endif
+
+    
 </div>
 @stop
 @section('js')

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+use Spatie\Permission\Models\Role;
+
 class UserController extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $users = User::where('name','LIKE','%'.$search.'%')->paginate();
+        $users = User::with('roles')->paginate();
         return view('user.index', compact('users'));
     }
 
@@ -46,17 +48,20 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        return view('user.edit');
+        $roles = Role::all();
+        return view('user.edit', compact('user','roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->roles()->sync($request->roles);       
+
+        return redirect()->route('user.index')->with('info','Se asigno los roles correctamente');
     }
 
     /**
