@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(RoleSeeder::class);
-        $this->call(UserSeeder::class);      
+        $this->call(UserSeeder::class);
+        
+        $this->call(DepartamentoSeeder::class);
+       $this->call(ProvinciaSeeder::class);
+       $this->call(DistritoSeeder::class);
     }
 }

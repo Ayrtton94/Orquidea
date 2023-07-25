@@ -9,7 +9,14 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable =['name','sku','quantity','price','status'];
+    protected $fillable =['name'
+    ,'sku'
+    ,'quantity'
+    ,'price'
+    ,'status'
+    ,'lots_id'
+    ,'category_id'
+    ,'provider_id'];
 
     public function lots()
     {

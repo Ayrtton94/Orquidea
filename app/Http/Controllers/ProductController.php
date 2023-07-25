@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Lot;
+use App\Models\Category;
+use App\Models\Provider;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -22,7 +24,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $categorys=Category::get();
+        $providers=Provider::get();
+        return view('product.create',compact('categorys','providers'));
     }
 
     /**
@@ -30,30 +34,31 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' =>'required|string',
-            'sku' =>'required|string|unique:products,sku',
-            'quantity' =>'required|integer',
-            'price' =>'required|string',
-            'lot_number' =>'required|string',
-            'expiration_date' =>'required|date',
-        ]);
-        $product = Product::create([
-            'name'=>$validatedData['name'],
-            'sku'=>$validatedData['sku'],
-            'quantity'=>$validatedData['quantity'],
-            'price'=>$validatedData['price'],
-        ]);
-
-        $lot = new Lot();
-        $lot->product_id = $product->id;
-        $lot->lot_number=$validatedData['lot_number'];
-        $lot->expiration_date=$validatedData['expiration_date'];
-        $lot->quantity=$validatedData['quantity'];
+       // Crear un nuevo lote en la base de datos
+        $lot = new Lot([
+            'expiration_date' => $request->expiration_date,
+            'lot_number' => $request->lot_number
+        ]);        
         $lot->save();
+        // Iterar sobre los datos del formulario
+        foreach ($request->productos as $key => $value) {
+            // Crear un registro en la tabla
+            $product = new Product([
+                'category_id' => $request->input('productos')[$key]['category_id'],
+                'provider_id' => $request->provider_id,
+                'lots_id' => $lot->id,
+                'name' => $request->input('productos')[$key]['name'],
+                'sku' => $request->input('productos')[$key]['sku'],
+                'price' => $request->input('productos')[$key]['price']
+            ]);            
+            $product->save();
 
-        return redirect()->route('producto.index')->with('success', 'Producto y lote creados exitosamente');
+            
 
+
+        }
+         // Devolver una respuesta al usuario
+         return redirect('product')->with('success', 'Los registros se han guardado correctamente.');
     }
 
     /**
@@ -69,7 +74,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('product.edit',compact('product'));
     }
 
     /**

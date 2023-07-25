@@ -10,23 +10,24 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('sku');
-            $table->integer('quantity');
-            $table->decimal('price');
-            $table->boolean('status')->default(1);
-            $table->timestamps();
-        });
+    {        
         Schema::create('lots', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->id();            
             $table->string('lot_number');
-            $table->integer('quantity');
             $table->date('expiration_date');
             $table->timestamps();
+        });
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('category_id');           
+            $table->string('provider_id');    
+            $table->string('name');
+            $table->string('sku');
+            $table->decimal('price');
+            $table->boolean('status')->default(1);
+            $table->foreignId('lots_id')->constrained()->onDelete('cascade');           
+            $table->timestamps();           
+            
         });
     }
 
@@ -35,7 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lots');
         Schema::dropIfExists('products');
+        Schema::dropIfExists('lots');        
     }
 };

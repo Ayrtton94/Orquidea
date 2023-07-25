@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Listar Producto')
+@section('title', 'Producto')
 
 @section('content_header')
     <h1>Listar productos</h1>
@@ -24,10 +24,7 @@
                         <th>#</th>
                         <th>Nombre</th>
                         <th>SKU</th>
-                        <th>Cantidad</th>
                         <th>Precio</th>
-                        <th>Lote</th>
-                        <th>Fecha</th>
                         <th>Accion</th>
                     </tr>
                 </thead>
@@ -37,14 +34,10 @@
                         <td>{{$product->id}}</td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->sku}}</td>
-                        <td>{{$product->quantity}}</td>
-                        <td>{{$product->price}}</td>
-                        @foreach ($product->lots as $lot)
-                        <td>{{$lot->lot_number}}</td>
-                        <td>{{$lot->expiration_date}}</td>
-                        @endforeach
-                        
-                        <td></td>
+                        <td>{{$product->price}}</td>                        
+                        <td>
+                            <a type="button" class="btn btn-success" href="{{ url('product/'.$product->id.'/edit') }}">Editar</a>
+                        </td>
                     </tr>
                     @endforeach                    
                 </tbody>

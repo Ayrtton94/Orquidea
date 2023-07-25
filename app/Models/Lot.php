@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Lot extends Model
 {
     use HasFactory;
-     protected $fillable =['product_id','lot_number','quantity','expiration_date'];
+     protected $fillable =[
+        'lot_number',
+        'expiration_date'];
 
      public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(Product::class);
     }
 }

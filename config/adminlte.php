@@ -316,10 +316,23 @@ return [
             'url'  => 'user',
             'icon' => 'fas fa-users fa-fw',
         ],
-        ['header' =>'Inventario'],
         [
-            'text'        => 'Area',
-            'url'         => 'area',
+            'text' => 'Vendedores',
+            'url'  => 'seller',
+            'icon' => 'fas fa-users fa-fw',
+        ],
+
+        ['header' =>'Gestion de Inventario'],
+
+        [
+            'text'        => 'Categoria',
+            'url'         => 'category',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Proveedores',
+            'url'         => 'provider',
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ],
@@ -329,6 +342,16 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ],
+
+        ['header' =>'Gestion de cliente'],
+
+        [
+            'text'        => 'Cliente',
+            'url'         => 'customer',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+
     ],
 
     /*
