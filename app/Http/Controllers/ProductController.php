@@ -49,7 +49,8 @@ class ProductController extends Controller
                 'lots_id' => $lot->id,
                 'name' => $request->input('productos')[$key]['name'],
                 'sku' => $request->input('productos')[$key]['sku'],
-                'price' => $request->input('productos')[$key]['price']
+                'price' => $request->input('productos')[$key]['price'],
+                'quantity' => $request->input('productos')[$key]['quantity']
             ]);            
             $product->save();
 
@@ -88,8 +89,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $data = Product::findOrFail($id);
+		$data->update(['status' => 0]);
+        return redirect()->route('producto.index')->with('success', 'producto eliminado');
     }
 }

@@ -12,7 +12,7 @@
             <a class="btn btn-success" type="submit" href="{{route('customer.create')}}">Nuevo Cliente</a>
         </div>
         <div class="card-body">
-            <table class="table table">
+            <table class="table table-striped" id="dataTable">
                 <thead class="thead">
                     <tr>
                         <th>#</th>
@@ -37,7 +37,6 @@
                         <td>{{$customer->number_doc}}</td>
                         <td>
                             <a class="btn btn-warning" href="{{url('/customer/'.$customer->id.'/edit')}}">Editar</a>
-                            ||
                                     
                                 <form action="{{ url('/customer/'.$customer['id'] ) }}" class="d-inline" method="post">
                                     @csrf
@@ -56,6 +55,19 @@
     </div>
 @stop
 
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+@stop
+
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
 @stop

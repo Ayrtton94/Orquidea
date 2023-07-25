@@ -15,18 +15,11 @@
 
 
 <div class="card">
-
     <div class="card-header">
-        <form action="#" id="search-form">
-            <input class="form-control" type="text" name="search" id="search-input" placeholder="Buscar...">
-        </form>
-        <div id="search-results"></div>
+        <a href="{{route('user.create')}}" class="btn btn-success" type="submit">Nuevo Usuario</a>
     </div>
-
-    @if($users->count())
-
     <div class="card-body">
-        <table class="table table-striped">
+        <table class="table table-striped" id="dataTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -54,34 +47,23 @@
                 @endforeach                            
             </tbody>
         </table>
-    </div>
-
-    <div class="card-footer">
-        {{$users->links()}}
-    </div>        
-    @else
-        <div class="card-body">
-            <strong>No hay registro</strong>
-        </div>
-    @endif
-
-    
+    </div>    
 </div>
 @stop
+
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+@stop
+
 @section('js')
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
-            $('#search-input').on('input', function() {
-                var searchTerm = $(this).val();
-
-        $.ajax({
-            url: '{{ url("user") }}',
-            type: 'GET',
-            data: {search: searchTerm},
-            success: function(data) {
-                $('#search-results').html(data);
-            }
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
         });
-    });
     </script>
 @stop

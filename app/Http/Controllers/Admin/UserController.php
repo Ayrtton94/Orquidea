@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 use Spatie\Permission\Models\Role;
 
@@ -16,7 +18,6 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $search = $request->input('search');
         $users = User::with('roles')->paginate();
         return view('user.index', compact('users'));
     }
@@ -34,7 +35,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|max:8|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('user/create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        // Crear el usuario en la base de datos
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('user.index')->with('success', '¡Registro exitoso! Por favor, inicia sesión.');
     }
 
     /**

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('sku');
             $table->decimal('price');
+            $table->string('quantity');
             $table->boolean('status')->default(1);
             $table->foreignId('lots_id')->constrained()->onDelete('cascade');           
             $table->timestamps();           

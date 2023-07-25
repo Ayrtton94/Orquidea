@@ -37,6 +37,7 @@
                             <th>Categoria</th>
                             <th>SKU</th>
                             <th>Precio</th>
+                            <th>Cantidad</th>
                             <th>Accion</th>
                         </tr>
                     </thead>
@@ -53,6 +54,7 @@
                             </td>
                             <td><input class="form-control" type="text" name="productos[0][sku]" id="sku" required></td>
                             <td><input class="form-control" type="text" name="productos[0][price]" id="price" required></td>
+                            <td><input class="form-control" type="text" name="productos[0][quantity]" id="quantity" required></td>
                             <td><button type="button" class="btn btn-danger btn-sm remove-fields">Eliminar</button></td>
                         </tr>
                     </tbody>
@@ -85,6 +87,7 @@
             </td>
             <td><input class="form-control" type="text" name="productos[${count}][sku]" id="sku" required></td>
             <td><input class="form-control" type="text" name="productos[${count}][price]" id="price" required></td>
+            <td><input class="form-control" type="text" name="productos[${count}][quantity]" id="quantity" required></td>
             <td><button type="button" class="btn btn-danger btn-sm remove-fields">Eliminar</button></td>
         </tr>
         `;

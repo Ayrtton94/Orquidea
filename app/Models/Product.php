@@ -15,6 +15,7 @@ class Product extends Model
     ,'price'
     ,'status'
     ,'lots_id'
+    ,'quantity'
     ,'category_id'
     ,'provider_id'];
 
