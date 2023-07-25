@@ -42,6 +42,12 @@
                     </td>
                     <td width="10px">
                         <a class="btn btn-primary" href="{{ url('/user/'.$user['id'].'/edit') }}">Editar</a>
+
+                        <form action="{{ url('/user/'.$user['id'] ) }}" class="d-inline" method="post">
+                            @csrf
+                            {{ method_field('DELETE') }}
+                                <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
+                        </form>
                     </td>
                 </tr>
                 @endforeach                            

@@ -38,7 +38,7 @@
                             <td>
                                 <a class="btn btn-warning" href="{{ url('/provider/'.$proveedore['id'].'/edit') }}">Editar</a>
 
-                                ||
+                                
                                     
                                 <form action="{{ url('/provider/'.$proveedore['id'] ) }}" class="d-inline" method="post">
                                     @csrf
