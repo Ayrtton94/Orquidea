@@ -31,9 +31,6 @@
                               </div>
                           @endif
   
-                          <div class="card">
-                              <h5 class="card-header">Editar de Proveedores</h5>
-                              <div class="card-body">
                                   <div class="card">
                                       <h5 class="card-header">Empresa</h5>
                                       <div class="card-body">
@@ -129,9 +126,7 @@
                                           </thead>
                                         </table>
                                       </div>
-                                    </div> 
-                              </div>                            
-                          </div>                        
+                                    </div>                        
                       </form>
                     </div>                                                  
                 </div>

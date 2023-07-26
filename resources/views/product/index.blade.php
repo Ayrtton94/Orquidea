@@ -13,42 +13,46 @@
     </div>
 @endif
 
-   <div class="card">
-        <div class="card-header">            
-            <a type="button" class="btn btn-success" href="{{ route('producto.create') }}">Nuevo Producto</a>
-        </div>
-        <div class="card-body">
-            <table class="table table-striped" id="dataTable">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>SKU</th>
-                        <th>Precio</th>
-                        <th>Accion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($products as $product)
-                    <tr>
-                        <td>{{$product->id}}</td>
-                        <td>{{$product->name}}</td>
-                        <td>{{$product->sku}}</td>
-                        <td>{{$product->price}}</td>                        
-                        <td>
-                            <a type="button" class="btn btn-success" href="{{ url('product/'.$product->id.'/edit') }}">Editar</a>
-                            <form action="{{ url('/product/'.$product['id'] ) }}" class="d-inline" method="post">
-                                @csrf
-                                {{ method_field('DELETE') }}
-                                    <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach                    
-                </tbody>
-            </table>
-        </div>
-   </div>
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header">            
+                <a type="button" class="btn btn-success" href="{{ route('producto.create') }}">Nuevo Producto</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>SKU</th>
+                            <th>Precio</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($products as $product)
+                        <tr>
+                            <td>{{$product->id}}</td>
+                            <td>{{$product->name}}</td>
+                            <td>{{$product->sku}}</td>
+                            <td>{{$product->price}}</td>                        
+                            <td>
+                                <a type="button" class="btn btn-success" href="{{ url('product/'.$product->id.'/edit') }}">Editar</a>
+                                <form action="{{ url('/product/'.$product['id'] ) }}" class="d-inline" method="post">
+                                    @csrf
+                                    {{ method_field('DELETE') }}
+                                        <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach                    
+                    </tbody>
+                </table>
+            </div>
+       </div>
+    </div>
+</div>   
 @stop
 
 @section('css')
